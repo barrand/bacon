@@ -14,7 +14,6 @@ public class EditNameDialog extends DialogFragment {
 
     private EditText mEditText;
     private Button okBtn;
-    public int ssidLocation;
     public String ssidLabel;
 
     public EditNameDialog() {

@@ -95,17 +95,16 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_wifi_home) {
-            showEditDialog(HOME, "home");
+            showEditDialog(Model.HOME);
         }else if (id == R.id.action_wifi_work) {
-            showEditDialog(WORK, "work");
+            showEditDialog(Model.WORK);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void showEditDialog(int ssidLocation, String ssidLabel) {
+    private void showEditDialog(String ssidLabel) {
         FragmentManager fm = getSupportFragmentManager();
         EditNameDialog editNameDialog = new EditNameDialog();
-        editNameDialog.ssidLocation = ssidLocation;
         editNameDialog.ssidLabel = ssidLabel;
         editNameDialog.show(fm, "fragment_edit_name");
     }

@@ -5,4 +5,7 @@ package com.barrand.bacon.app;
  */
 public class Model {
     public static String PREFS_NAME = "BaconPrefs";
+    public static String HOME = "Home";
+    public static String WORK = "Work";
+
 }
