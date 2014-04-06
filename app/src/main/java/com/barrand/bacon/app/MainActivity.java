@@ -32,6 +32,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
+    public static int HOME = 0;
+    public static int WORK = 1;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -93,16 +95,18 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_wifi_home) {
-            showEditDialog();
+            showEditDialog(HOME, "home");
         }else if (id == R.id.action_wifi_work) {
-            return true;
+            showEditDialog(WORK, "work");
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void showEditDialog() {
+    private void showEditDialog(int ssidLocation, String ssidLabel) {
         FragmentManager fm = getSupportFragmentManager();
         EditNameDialog editNameDialog = new EditNameDialog();
+        editNameDialog.ssidLocation = ssidLocation;
+        editNameDialog.ssidLabel = ssidLabel;
         editNameDialog.show(fm, "fragment_edit_name");
     }
 
