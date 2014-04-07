@@ -1,6 +1,5 @@
 package com.barrand.bacon.app;
 import android.content.SharedPreferences;
-import android.graphics.AvoidXfermode;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -8,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.barrand.bacon.app.model.Model;
 // ...
 
 public class EditNameDialog extends DialogFragment {
