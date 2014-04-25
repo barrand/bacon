@@ -7,6 +7,8 @@ public class Model {
     public static String PREFS_NAME = "BaconPrefs";
     public static String HOME = "Home";
     public static String WORK = "Work";
-    public static String WAITING_FOR_DISCONNECT_FROM = "Work";
+    public static String LAST_NETWORK_OF_INTEREST = "lastNetworkOfInterest";
+    public static String CURRENT_STATE = "current state";
+    public static String TRIP_START_TIME;
 
 }
