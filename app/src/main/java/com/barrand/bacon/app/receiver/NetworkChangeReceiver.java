@@ -44,9 +44,9 @@ public class NetworkChangeReceiver extends BroadcastReceiver{
                 //if we connected to a network we are interested in, home or work
                 if(sp.getInt(Model.CURRENT_STATE, 0) == STATE_DISCONNECTED_FROM_INTERESTED_TRIP_STARTED){
                     //make sure we connected to a unique network (not the one we were just on)
-                    if(!sp.getString(Model.LAST_NETWORK_OF_INTEREST,null).equals(homeOrWorkConstant)){
+//                    if(!sp.getString(Model.LAST_NETWORK_OF_INTEREST,null).equals(homeOrWorkConstant)){
                         endTrip(context);
-                    }
+//                    }
                 }
                 editor.putString(Model.LAST_NETWORK_OF_INTEREST, homeOrWorkConstant);
                 editor.putInt(Model.CURRENT_STATE, STATE_CONNETED_TO_INTEREST);
@@ -121,8 +121,9 @@ public class NetworkChangeReceiver extends BroadcastReceiver{
 //        SharedPreferences.Editor editor = sp.edit();
         Long tripStartTime = sp.getLong(Model.TRIP_START_TIME, 0);
         Long now = System.currentTimeMillis();
+        Long millis = now - tripStartTime;
 
-        int minutes = (int) ((now - tripStartTime / (1000*60)) % 60);
+        int minutes = (int) ((millis / 1000) / 60);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
