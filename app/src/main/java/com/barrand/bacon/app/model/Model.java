@@ -11,4 +11,8 @@ public class Model {
     public static String CURRENT_STATE = "current state";
     public static String TRIP_START_TIME;
 
+//    public static int TRIP_MIN = 10;
+    public static int TRIP_MIN = 10;
+    public static int TRIP_MAX = 200;
+
 }

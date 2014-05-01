@@ -25,7 +25,6 @@ public class TripDatabaseHandler extends SQLiteOpenHelper {
  
     // Trips Table Columns names
     private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
     private static final String KEY_START_TIME = "startTime";
     private static final String KEY_ARRIVE_TIME = "arriveTime";
     private static final String KEY_DURATION_TIME = "durationTime";
@@ -40,10 +39,9 @@ public class TripDatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TRIPS_TABLE = "CREATE TABLE " + TABLE_TRIPS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-        		+ KEY_NAME + " TEXT,"
                 + KEY_START_TIME + " INT,"
                 + KEY_ARRIVE_TIME + " INT,"
-                + KEY_DURATION_TIME + " INT,"
+                + KEY_DURATION_TIME + " INT"
         		+ ")";
         db.execSQL(CREATE_TRIPS_TABLE);
     }
@@ -67,7 +65,6 @@ public class TripDatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, trip.name);
         values.put(KEY_START_TIME, trip.startTime);
         values.put(KEY_ARRIVE_TIME, trip.arriveTime);
         values.put(KEY_DURATION_TIME, trip.durationTime);
@@ -91,11 +88,9 @@ public class TripDatabaseHandler extends SQLiteOpenHelper {
             do {
                 Trip trip = new Trip();
                 trip.sqliteId = Long.parseLong(cursor.getString(0));
-                trip.name = cursor.getString(1);
                 trip.startTime = cursor.getLong(2);
                 trip.arriveTime = cursor.getLong(3);
                 trip.durationTime = cursor.getLong(4);
-                trip.mqkey = cursor.getString(5);
                 // Adding trip to list
                 tripList.add(trip);
             } while (cursor.moveToNext());

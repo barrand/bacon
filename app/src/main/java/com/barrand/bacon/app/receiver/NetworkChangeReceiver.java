@@ -13,7 +13,9 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.barrand.bacon.app.R;
+import com.barrand.bacon.app.db.TripDatabaseHandler;
 import com.barrand.bacon.app.model.Model;
+import com.barrand.bacon.app.model.Trip;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -43,7 +45,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver{
 
                 //if we connected to a network we are interested in, home or work
                 if(sp.getInt(Model.CURRENT_STATE, 0) == STATE_DISCONNECTED_FROM_INTERESTED_TRIP_STARTED){
-                    //make sure we connected to a unique network (not the one we were just on)
+//                    make sure we connected to a unique network (not the one we were just on)
 //                    if(!sp.getString(Model.LAST_NETWORK_OF_INTEREST,null).equals(homeOrWorkConstant)){
                         endTrip(context);
 //                    }
@@ -119,20 +121,27 @@ public class NetworkChangeReceiver extends BroadcastReceiver{
     private void endTrip(Context context){
         SharedPreferences sp = context.getSharedPreferences(Model.PREFS_NAME, 0);
 //        SharedPreferences.Editor editor = sp.edit();
-        Long tripStartTime = sp.getLong(Model.TRIP_START_TIME, 0);
-        Long now = System.currentTimeMillis();
-        Long millis = now - tripStartTime;
 
-        int minutes = (int) ((millis / 1000) / 60);
+        Trip trip = new Trip();
+        trip.startTime = sp.getLong(Model.TRIP_START_TIME, 0l);
+        trip.arriveTime = System.currentTimeMillis();
+        trip.durationTime = trip.arriveTime - trip.startTime;
 
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("Trip End")
-                        .setContentText("Duration: " + minutes);
+        //only if the trip is longer than the min, sometimes we get a bogus trip of 0 minutes
+        if(trip.getMinutes() >= Model.TRIP_MIN && trip.getMinutes() < Model.TRIP_MAX){
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(context)
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setContentTitle("Trip End")
+                            .setContentText("Duration: " + trip.getMinutes());
+            TripDatabaseHandler db = new TripDatabaseHandler(context);
+            db.addTrip(trip);
 
-        NotificationManager mNotificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(9999, mBuilder.build());
+
+            NotificationManager mNotificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(9999, mBuilder.build());
+        }
+
     }
 }
