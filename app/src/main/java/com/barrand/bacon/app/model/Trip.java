@@ -17,4 +17,7 @@ public class Trip {
         return _minutes;
     }
 
+    public String toString(){
+        return "duration time " + durationTime;
+    }
 }

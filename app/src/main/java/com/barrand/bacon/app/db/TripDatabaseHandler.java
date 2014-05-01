@@ -88,9 +88,9 @@ public class TripDatabaseHandler extends SQLiteOpenHelper {
             do {
                 Trip trip = new Trip();
                 trip.sqliteId = Long.parseLong(cursor.getString(0));
-                trip.startTime = cursor.getLong(2);
-                trip.arriveTime = cursor.getLong(3);
-                trip.durationTime = cursor.getLong(4);
+                trip.startTime = cursor.getLong(1);
+                trip.arriveTime = cursor.getLong(2);
+                trip.durationTime = cursor.getLong(3);
                 // Adding trip to list
                 tripList.add(trip);
             } while (cursor.moveToNext());

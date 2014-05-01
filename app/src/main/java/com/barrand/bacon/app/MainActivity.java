@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.barrand.bacon.app.fragments.EditNameDialog;
+import com.barrand.bacon.app.fragments.LogFragment;
 import com.barrand.bacon.app.model.Model;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
@@ -142,7 +144,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+
+            if(position == 0){
+                return LogFragment.newInstance(position+1);
+            }else{
+                return PlaceholderFragment.newInstance(position + 1);
+            }
         }
 
         @Override

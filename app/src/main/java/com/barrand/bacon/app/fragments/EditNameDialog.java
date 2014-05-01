@@ -1,4 +1,4 @@
-package com.barrand.bacon.app;
+package com.barrand.bacon.app.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.barrand.bacon.app.R;
 import com.barrand.bacon.app.model.Model;
 // ...
 
